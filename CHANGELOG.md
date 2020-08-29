@@ -1,9 +1,10 @@
 # Change Log
 
-## 1.1.6 (August 29, 2020)
+## 1.1.7 (August 29, 2020)
 
 - Feature: Add `Paste base64 image of clipboard` to editor context menu.
 - Fix: The command to be executed was incorrect. `Paste image of clipboard` to editor context menu.
+- Fix: displayName `Paste Image to local pc` -> `Paste Image from local pc`
 
 ## 1.1.5 (August 26, 2020)
 
