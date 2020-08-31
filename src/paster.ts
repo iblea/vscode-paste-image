@@ -3,7 +3,7 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import {PasterConfig, PredefinedVars} from './config';
-import {getShellScript} from './shellscript';
+import {getShellScript, Base64TextScript} from './shellscript';
 
 function getRelativePath(docPath: vscode.Uri, imageFilePath: vscode.Uri): string {
     return encodeURI(path.relative(docPath.fsPath, imageFilePath.fsPath).replace(/\\/g, '/'));
@@ -11,7 +11,7 @@ function getRelativePath(docPath: vscode.Uri, imageFilePath: vscode.Uri): string
 
 class Paster {
     public static async pasteImageOnWorkspace(output:vscode.Uri) {
-        const script = getShellScript();
+        const script = await Base64TextScript.getScript()||getShellScript();
         try {
             const stat = await vscode.workspace.fs.stat(output);
             const predefinedVars = new PredefinedVars(output);
@@ -33,7 +33,7 @@ class Paster {
         const editor = vscode.window.activeTextEditor;
         if (!editor) {return;}
         const target = new PasteTarget(editor);
-        const script = getShellScript();
+        const script = await Base64TextScript.getScript()||getShellScript();
 
         try {
             let imageUri = target.getImagePath();
@@ -56,7 +56,7 @@ class Paster {
         const editor = vscode.window.activeTextEditor;
         if (!editor) {return;}
         const target = new PasteTarget(editor);
-        const script = getShellScript();
+        const script = await Base64TextScript.getScript()||getShellScript();
 
         try {
             const imageUri = target.getImagePath();
