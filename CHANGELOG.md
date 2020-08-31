@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.8 (September 01, 2020)
+
+- Feature: Support convert base64 text of clipboard to image data. it's only png image.
+
 ## 1.1.7 (August 29, 2020)
 
 - Feature: Add `Paste base64 image of clipboard` to editor context menu.

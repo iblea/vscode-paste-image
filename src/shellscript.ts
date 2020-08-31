@@ -1,5 +1,6 @@
 'use strict';
 import * as path from 'path';
+import * as vscode from 'vscode';
 import {spawn, ChildProcess} from 'child_process';
 
 function executeCommand(shell:string, options: string[]): Promise<string> {
@@ -146,4 +147,25 @@ class MacScript implements ScriptRunner {
     }
 }
 
-export {getShellScript};
+class Base64TextScript implements ScriptRunner {
+    public static async getScript(){
+        return !!await vscode.env.clipboard.readText() ? new Base64TextScript() : undefined;
+    }
+
+    public async getBase64Image() {
+        const base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+        let base64 = await this.runScript("",[]);
+        base64 = base64.replace(/\s+/g, "");
+        base64 = base64.replace(/^.*,/, "");
+        if(!base64regex.test(base64)) {
+            throw new Error('faild genrate image from base64 text of clipboard');
+        }
+        return base64;
+    }
+
+    public async runScript(script:string, parameters:string[]): Promise<string> {
+        return await vscode.env.clipboard.readText();
+    }
+}
+
+export {getShellScript, Base64TextScript};
