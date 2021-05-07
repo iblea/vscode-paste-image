@@ -23,7 +23,7 @@ class PasterConfig {
         if (path.isAbsolute(savefolder)) {
             return vscode.Uri.file(savefolder);
         }
-        return vscode.Uri.joinPath(uri, savefolder);
+        return vscode.Uri.joinPath(uri, "../", savefolder);
     }
 
     public static getPasteTemplate(languageId: string): string {

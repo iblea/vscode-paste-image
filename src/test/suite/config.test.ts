@@ -7,7 +7,7 @@ import {PasterConfig, PredefinedVars} from '../../config';
 import moment = require('moment');
 
 function sleep(time:number) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
         setTimeout(() => {
             resolve();
         }, time);
@@ -54,9 +54,9 @@ describe('Extension Test Suite (config)', () => {
 	});
 
 	it('getBasePath test relative', async () => {
-		const uri:vscode.Uri = vscode.Uri.joinPath(rootDir, "sample");
+		const uri:vscode.Uri = vscode.Uri.joinPath(rootDir, "zzz/sample.abc");
 		await conf.update('path', './');
-		assert.equal(""+uri+"/", ""+PasterConfig.getBasePath(uri));
+		assert.equal(""+rootDir+"/zzz/", ""+PasterConfig.getBasePath(uri));
 	});
 
 	it('getBasePath test absolute', async () => {
@@ -87,13 +87,13 @@ describe('Extension Test Suite (config)', () => {
 	it('getBasePath test fileBasenameNoExtension', async () => {
 		const uri:vscode.Uri = vscode.Uri.joinPath(rootDir, "zzz/sample.abc");
 		await conf.update('path', "${fileBasenameNoExtension}");
-		assert.equal(""+uri+"/sample", ""+PasterConfig.getBasePath(uri));
+		assert.equal(""+rootDir+"/zzz/sample", ""+PasterConfig.getBasePath(uri));
 	});
 
 	it('getBasePath test fileBasename', async () => {
 		const uri:vscode.Uri = vscode.Uri.joinPath(rootDir, "zzz/sample.abc");
 		await conf.update('path', "${fileBasename}");
-		assert.equal(""+uri+"/sample.abc", ""+PasterConfig.getBasePath(uri));
+		assert.equal(""+rootDir+"/zzz/sample.abc", ""+PasterConfig.getBasePath(uri));
 	});
 
 	it('getBasePath test fileDirname', async () => {

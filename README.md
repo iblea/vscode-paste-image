@@ -41,8 +41,8 @@ Now you can enable `pasteImage.showFilePathConfirmInputBox` to modify file path 
     
     - `${currentFileDir}`: the path of directory that contain current editing file. 
     - `${projectRoot}`: the path of the project opened in vscode.
-    - `${currentFileName}`: the current file name with ext.
-    - `${currentFileNameWithoutExt}`: the current file name without ext.
+    - `${fileBasename}`: the current file name with ext.
+    - `${fileBasenameNoExtension}`: the current file name without ext.
 
     Default value is `./`.
 

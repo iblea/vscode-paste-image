@@ -106,19 +106,19 @@ class PasteTarget {
         const tpl = PasterConfig.getPasteTemplate(lang);
  
         const filePath:string = getRelativePath(baseUri, imageUri);
-        const predefinedVars = new PredefinedVars(baseUri);
+        const predefinedVars = new PredefinedVars(this.editor.document.uri);
         predefinedVars.set("relativePath", filePath);
 
         return predefinedVars.replace(tpl);
     }
 
     public getPasteBase64ImageText(imageUri:vscode.Uri, base64:string):string[] {
-        const baseUri = this.getBaseUri();
+        // const baseUri = this.getBaseUri();
         const lang = this.editor.document.languageId;
         const tpls = PasterConfig.getPasteBase64Template(lang);
         
         const filePath:string = path.basename(imageUri.fsPath);
-        const predefinedVars = new PredefinedVars(baseUri);
+        const predefinedVars = new PredefinedVars(this.editor.document.uri);
         predefinedVars.set("relativePath", filePath);
         predefinedVars.set("base64", base64);
 
@@ -127,7 +127,7 @@ class PasteTarget {
     
     public getImagePath():vscode.Uri {
         let baseUri = this.getBaseUri();
-        baseUri = PasterConfig.getBasePath(baseUri);
+        baseUri = PasterConfig.getBasePath(this.editor.document.uri);
 
         const content = this.getSelectText();
         const predefinedVars = new PredefinedVars(this.editor.document.uri);
