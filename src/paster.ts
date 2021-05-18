@@ -156,6 +156,7 @@ class PasteTarget {
     }
 
     public pasteText(context:string){
+        context = decodeURI(context);
         return this.editor.edit(edit => {
             const current = this.editor.selection;
 
