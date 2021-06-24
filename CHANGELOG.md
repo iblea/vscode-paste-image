@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.1.9 (June 24, 2021)
+
+- Fix: update README.md
+- Fix: varibale 'fileBasename' and 'fileBasenameNoExtension' misrouted to real file's directory, not exactly the file
+
 ## 1.1.8 (September 01, 2020)
 
 - Feature: Support convert base64 text of clipboard to image data. it's only png image.
