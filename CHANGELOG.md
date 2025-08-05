@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.0 (August 05, 2025)
+
+ Feature: Add WrapBase64 and previewName option.
+
 ## 1.1.9 (June 24, 2021)
 
 - Fix: update README.md
