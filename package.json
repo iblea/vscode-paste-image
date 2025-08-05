@@ -1,5 +1,5 @@
 {
-  "name": "vscode-paste-image (forked sakamoto66)",
+  "name": "vscode-paste-image-iblea",
   "displayName": "Paste Image from local pc (forked sakamoto66)",
   "description": "paste image from local pc clipboard directly",
   "version": "1.2.0",
@@ -139,7 +139,7 @@
     "eslint": "^7.6.0",
     "glob": "^7.1.6",
     "mocha": "^8.0.1",
-    "typescript": "^3.8.3",
+    "typescript": "^5.9.2",
     "vscode-test": "^1.4.0"
   }
 }
