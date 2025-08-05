@@ -2,7 +2,7 @@
   "name": "vscode-paste-image (forked sakamoto66)",
   "displayName": "Paste Image from local pc (forked sakamoto66)",
   "description": "paste image from local pc clipboard directly",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "engines": {
     "vscode": "^1.40.0"
   },
@@ -61,10 +61,20 @@
           "default": "Y-MM-DD-HH-mm-ss",
           "description": "The default image file name. The value of this config will be pass to the 'format' function of moment library(a js time manipulation library), you can read document https://momentjs.com/docs/#/displaying/format/ for advanced usage."
         },
+        "pasteImage.previewName": {
+          "type": "string",
+          "default": "image",
+          "description": "The name of the preview image"
+        },
         "pasteImage.showFilePathConfirmInputBox": {
           "type": "boolean",
           "default": false,
           "description": "Set to true if you want to be able to change the file path or name prior to saving the file to disk"
+        },
+        "pasteImage.wrapBase64": {
+          "type": "boolean",
+          "default": true,
+          "description": "Determines whether to apply line breaks to base64 encoded images"
         }
       }
     },

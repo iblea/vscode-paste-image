@@ -25,10 +25,16 @@ class PasterConfig {
         }
         return vscode.Uri.joinPath(uri, "../", savefolder);
     }
+    public static getPreviewName(): string {
+        return vscode.workspace.getConfiguration('pasteImage').previewName;
+    }
+    public static getWrapBase64(): boolean {
+        return vscode.workspace.getConfiguration('pasteImage').wrapBase64;
+    }
 
     public static getPasteTemplate(languageId: string): string {
         let tpls:Map<string, string> = new Map();
-        tpls.set("markdown", "![](${relativePath})");
+        tpls.set("markdown", "![${previewName}](${relativePath})");
         tpls.set("asciidoc", "image::${relativePath}[]");
 
         let tpl:string|undefined;
@@ -37,14 +43,14 @@ class PasterConfig {
                 tpl = val;
             }
         });
-        return tpl ? tpl : "${relativePath}";
+        return tpl || "${relativePath}";
     }
 
     public static getPasteBase64Template(languageId: string): string[] {
         let tpls:Map<string, string[]> = new Map();
         tpls.set("markdown", [
-            "![][${relativePath}]",
-            "\n[${relativePath}]:data:image/png;base64,${base64}\n"
+            "<img alt=\"${previewName}\" src=\"data:image/png;base64,${base64}\" />",
+            "\n"
         ]);
         tpls.set("asciidoc", [
             "image::data:image/png;base64,${base64}[]",
@@ -57,7 +63,7 @@ class PasterConfig {
                 tpl = val;
             }
         });
-        return tpl||[
+        return tpl || [
             "data:image/png;base64,${base64}",
             ""
         ];
@@ -74,7 +80,7 @@ class PredefinedVars {
             this.set("workspaceRoot", rootDir);
             this.set("projectRoot", rootDir);
         }
-        
+
         const currPath = current && current.fsPath;
 
         if(currPath) {
@@ -85,7 +91,7 @@ class PredefinedVars {
             this.set("fileDirname", path.dirname(currPath));
         }
     }
-    
+
     public replace(str:String) {
         this.replaceMap.forEach( (val, key) =>{
             str = str.replace(key, val);

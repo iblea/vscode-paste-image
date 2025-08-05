@@ -104,10 +104,11 @@ class PasteTarget {
         const baseUri = this.getBaseUri();
         const lang = this.editor.document.languageId;
         const tpl = PasterConfig.getPasteTemplate(lang);
- 
+
         const filePath:string = getRelativePath(baseUri, imageUri);
         const predefinedVars = new PredefinedVars(this.editor.document.uri);
         predefinedVars.set("relativePath", filePath);
+        predefinedVars.set("previewName", PasterConfig.getPreviewName());
 
         return predefinedVars.replace(tpl);
     }
@@ -116,15 +117,20 @@ class PasteTarget {
         // const baseUri = this.getBaseUri();
         const lang = this.editor.document.languageId;
         const tpls = PasterConfig.getPasteBase64Template(lang);
-        
+
         const filePath:string = path.basename(imageUri.fsPath);
         const predefinedVars = new PredefinedVars(this.editor.document.uri);
         predefinedVars.set("relativePath", filePath);
-        predefinedVars.set("base64", base64);
+        predefinedVars.set("previewName", PasterConfig.getPreviewName());
+        if(PasterConfig.getWrapBase64()){
+            predefinedVars.set("base64", base64.replace(/\s+/g, ""));
+        } else {
+            predefinedVars.set("base64", base64);
+        }
 
         return tpls.map(t => predefinedVars.replace(t));
     }
-    
+
     public getImagePath():vscode.Uri {
         let baseUri = this.getBaseUri();
         baseUri = PasterConfig.getBasePath(this.editor.document.uri);
@@ -167,7 +173,7 @@ class PasteTarget {
             }
         });
     }
-    
+
     public pasteEnd(context:string){
         return this.editor.edit(edit => {
             const pt = new vscode.Position(this.editor.document.lineCount, 0);
