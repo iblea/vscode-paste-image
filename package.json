@@ -1,6 +1,6 @@
 {
-  "name": "vscode-paste-image",
-  "displayName": "Paste Image from local pc",
+  "name": "vscode-paste-image (forked sakamoto66)",
+  "displayName": "Paste Image from local pc (forked sakamoto66)",
   "description": "paste image from local pc clipboard directly",
   "version": "1.1.9",
   "engines": {
@@ -9,18 +9,18 @@
   "categories": [
     "Other"
   ],
-  "publisher": "sakamoto66",
+  "publisher": "iblea",
   "author": {
-    "name": "sakamoto66",
-    "email": "sakamoto0322+github@gmail.com"
+    "name": "iblea",
+    "email": "iblea@iasdf.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sakamoto66/vscode-paste-image.git"
+    "url": "https://github.com/iblea/vscode-paste-image.git"
   },
-  "homepage": "https://github.com/sakamoto66/vscode-paste-image/blob/master/README.md",
+  "homepage": "https://github.com/iblea/vscode-paste-image/blob/master/README.md",
   "bugs": {
-    "url": "https://github.com/sakamoto66/vscode-paste-image/issues"
+    "url": "https://github.com/iblea/vscode-paste-image/issues"
   },
   "icon": "res/icon.png",
   "galleryBanner": {
